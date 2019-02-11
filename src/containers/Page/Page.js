@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from '../../axios-pages';
 import Content from "../../components/Content/Content";
+import loader from "../../hoc/loader/loader";
 
 class Page extends Component {
 
@@ -39,4 +40,4 @@ class Page extends Component {
     }
 }
 
-export default Page;
+export default loader(Page, axios);
