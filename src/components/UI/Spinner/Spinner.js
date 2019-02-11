@@ -1,10 +1,12 @@
 import React from 'react';
 import './Spinner.css';
 
-const Spinner = props => {
-	return (
-		<div className="Spinner">Loading...</div>
-	);
+const Spinner = ({show}) => {
+	if (show) {
+		return <div className="Spinner">Loading...</div>
+	}
+
+	return null;
 };
 
 export default Spinner;

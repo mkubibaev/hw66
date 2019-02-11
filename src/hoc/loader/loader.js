@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Spinner from "../../components/UI/Spinner/Spinner";
 
 const loader = (WrappedComponent, axios) => {
@@ -8,12 +8,13 @@ const loader = (WrappedComponent, axios) => {
 			super(props);
 
 			this.state = {
-				content: null
+				loading: true
 			};
 
 			this.state.interceptorId = axios.interceptors.response.use(res => {
-				console.log(res);
-				this.setState({content: res});
+				console.log('loaded');
+				this.setState({loading: false});
+				return res;
 			}, err => err);
 		}
 
@@ -23,11 +24,12 @@ const loader = (WrappedComponent, axios) => {
 
 
 		render() {
-			if (!this.state.content) {
-				return <Spinner/>
-			}
-
-			return <WrappedComponent {...this.props}/>
+			return (
+				<Fragment>
+					<Spinner show={this.state.loading}/>
+					<WrappedComponent {...this.props}/>
+				</Fragment>
+			)
 		}
 
 	}
